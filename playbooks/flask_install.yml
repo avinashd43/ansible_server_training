@@ -1,0 +1,39 @@
+---
+- hosts: mygroup
+  tasks:
+    - name: Install yum packages
+      yum:
+        name: ['epel-release', 'centos-release-scl', 'python3-pip', 'python3-devel', 'gcc', 'gcc-c++']
+        state: present
+    - name: Install pip pacakges
+      pip:
+        name: "{{ item }}"
+        state: present
+        executable: pip3
+      with_items:
+       - uwsgi
+       - flask
+    - name: Install yum packages
+      yum:
+        name: rh-python36
+        state: present
+    - name: Enable python3
+      command: scl_source enable rh-python36 bash
+
+    - name: Add scl to bashrc
+      lineinfile:
+        path: /etc/bashrc
+        regexp: "^scl_source"
+        line: scl_source enable rh-python36 bash
+        state: present
+ 
+
+#name: "{{ item }}"
+#      with_items:
+#        - epel-release
+#        - centos-release
+#        - rh-python36 
+#        - python3-pip
+#        - python3-devel
+#        - gcc
+#        - gcc-c++

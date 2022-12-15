@@ -1,0 +1,14 @@
+---
+- hosts: mygroup
+  tasks:
+  - name: create group
+    group:
+      name: sysadmin
+      state: present 
+  - name: create user
+    user:
+      name: elvis
+      groups: sysadmin
+      home: /home/elvis
+      shell: /bin/bash
+      state: present

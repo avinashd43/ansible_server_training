@@ -1,0 +1,12 @@
+---
+- hosts: mygroup
+  tasks:
+    - name: Install apache package
+      package:
+        name: httpd
+        state: present
+    - name: start apache service
+      service:
+        name: httpd
+        state: started
+    
