@@ -17,14 +17,15 @@
       yum:
         name: rh-python36
         state: present
+
     - name: Enable python3
-      command: scl_source enable rh-python36 bash
+      command: scl_source enable rh-python36
 
     - name: Add scl to bashrc
       lineinfile:
         path: /etc/bashrc
-        regexp: "^scl_source"
-        line: scl_source enable rh-python36 bash
+        regexp: "^scl"
+        line: source scl_source enable rh-python36
         state: present
  
 
